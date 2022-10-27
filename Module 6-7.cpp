@@ -29,26 +29,43 @@
 
 int main()
 {
-	std::cout << "Введите номер числа Фибоначчи: ";
-	int numberFib;
-	std::cin >> numberFib;
+	std::cout << "Введите числитель: ";
+	int fractionNumerator;
+	std::cin >> fractionNumerator;
 
-	while (numberFib < 1) {
-		std::cout << "\nНомер должен быть больше 1. Введите снова: ";
-		std::cin >> numberFib;
-	}
-	// Установка предела вычислений, половина ёмкости типа int
-	int halfInt = 1073741823;
-
-	// Инициализация последовательности и счётчика цикла
-	int resultFib = 1, previousFib = 0, count = 1;
-
-	while ((count < numberFib) && (previousFib <= halfInt)) {
-		resultFib += previousFib;
-		previousFib = resultFib - previousFib;
-		count++;
+	while (fractionNumerator == 0) {
+		std::cout << "\nПри числителе равном 0, дробь тоже равна 0 и сокращение не имеет смысла. Введите снова: ";
+		std::cin >> fractionNumerator;
 	}
 
-	if (previousFib <= halfInt) std::cout << "Число Фибоначчи номер " << numberFib << " - " << resultFib << "\n";
-	else std::cout << "Число Фибоначчи номер " << numberFib << " слишком велико и не может поместиться в переменную типа INT.\n";
+	std::cout << "Введите знаменатель: ";
+	int fractionDenumerator;
+	std::cin >> fractionDenumerator;
+	 
+	while (fractionDenumerator == 0) {
+		std::cout << "\nЗнаменатель должен быть не равен 0. Введите снова: ";
+		std::cin >> fractionDenumerator;
+	}
+
+	int greatestCommonDivisor, limit;
+
+	
+
+	do {
+		if (fractionNumerator < fractionDenumerator)
+			limit = fractionNumerator;
+		else
+			limit = fractionNumerator;
+		 
+		greatestCommonDivisor = limit;
+
+		while (!(fractionNumerator % greatestCommonDivisor) && !(fractionDenumerator % greatestCommonDivisor)){
+			greatestCommonDivisor--;
+		}
+		fractionNumerator /= greatestCommonDivisor;
+		fractionDenumerator /= greatestCommonDivisor;
+	} while (greatestCommonDivisor != 1);
+
+	std::cout << "Результат : " << fractionNumerator << " / " << fractionDenumerator << "\n";
+
 }
