@@ -59,7 +59,7 @@ int main()
 		 
 		greatestCommonDivisor = limit;
 
-		while (!(fractionNumerator % greatestCommonDivisor) && !(fractionDenumerator % greatestCommonDivisor)){
+		while (!(fractionNumerator % greatestCommonDivisor) && !(fractionDenumerator % greatestCommonDivisor) && (greatestCommonDivisor > 0)) {
 			greatestCommonDivisor--;
 		}
 		fractionNumerator /= greatestCommonDivisor;
