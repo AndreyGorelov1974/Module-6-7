@@ -41,31 +41,35 @@ int main()
 	std::cout << "Введите знаменатель: ";
 	int fractionDenumerator;
 	std::cin >> fractionDenumerator;
-	 
+
 	while (fractionDenumerator == 0) {
 		std::cout << "\nЗнаменатель должен быть не равен 0. Введите снова: ";
 		std::cin >> fractionDenumerator;
 	}
 
-	int greatestCommonDivisor, limit;
+	// определяем знак итоговой дроби
+	std::string sign;
+	if ((fractionDenumerator < 0 && fractionNumerator > 0) || (fractionDenumerator > 0 && fractionNumerator < 0)) sign = "-";
+	else sign = "";
 
-	
+	int greatestCommonDivisor;
 
+	// цикл DO длится пока НОД не станет 1
 	do {
-		if (fractionNumerator < fractionDenumerator)
-			limit = fractionNumerator;
-		else
-			limit = fractionNumerator;
-		 
-		greatestCommonDivisor = limit;
+		// первичный НОД определяем как большее из числителяи знаменателя
+		if (fractionNumerator < fractionDenumerator) greatestCommonDivisor = fractionNumerator;
+		else greatestCommonDivisor = fractionNumerator;
 
-		while (!(fractionNumerator % greatestCommonDivisor) && !(fractionDenumerator % greatestCommonDivisor) && (greatestCommonDivisor > 0)) {
+		// находим ближайший НОД 
+		while ((fractionNumerator % greatestCommonDivisor != 0 || fractionDenumerator % greatestCommonDivisor != 0) && greatestCommonDivisor > 1) {
 			greatestCommonDivisor--;
 		}
+
+		//сокращаем числитель и знаменатель
 		fractionNumerator /= greatestCommonDivisor;
 		fractionDenumerator /= greatestCommonDivisor;
+
 	} while (greatestCommonDivisor != 1);
 
-	std::cout << "Результат : " << fractionNumerator << " / " << fractionDenumerator << "\n";
-
+	std::cout << "Результат : "<< sign << abs(fractionNumerator) << " / " << abs(fractionDenumerator) << "\n";
 }
